@@ -1,0 +1,18 @@
+version: '3'
+services:
+  airflow:
+    image: apache/airflow:slim-latest    
+  services:
+    airflow_scheduler:
+      volumes:
+        # - C:/Users/admin/Payment_Transaction_Data_Pipeline:/opt/airflow/data  # Mounts local folder to /opt/airflow/data
+        # - C:/Users/admin/Payment_Transaction_Data_Pipeline/dags:/opt/airflow/dags
+        - C:/Users/admin/Payment_Transaction_Data_Pipeline/data:/opt/airflow/data
+
+    airflow_webserver:
+      volumes:
+        - C:/Users/admin/Payment_Transaction_Data_Pipeline/data:/opt/airflow/data  # Ensure webserver sees it too
+
+    ports:
+      - "8080:8080"
+    command: airflow standalone
